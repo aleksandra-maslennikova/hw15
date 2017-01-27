@@ -39,16 +39,22 @@ console.log(solution("1232454654cdefghijklmnoppo")); // false
  
  */
 
-function openBrackets(newArr, arr) {
-  if (Array.isArray(arr)) {
-    for (let i = 0; i < arr.length; i++) {
-      newArr.concat(openBrackets(newArr, arr[i]));
+
+function openBrackets(arr) {
+  let newArr;
+  for (let i = 0; i < arr.length; i++) {
+    if (newArr === undefined) {
+      newArr = [];
     }
-  } else {
-    newArr.push(arr);
+    if (Array.isArray(arr[i])) {
+      newArr = newArr.concat(openBrackets(arr[i]));
+    } else {
+      newArr.push(arr[i]);
+    }
   }
   return newArr
 }
+
 console.log(openBrackets([], [[1, 2], [3, [4]], 5, 10]));
 console.log(openBrackets([], [1, [2, [{ a: "b" }]]]));
 
@@ -129,3 +135,6 @@ class TelephoneBook {
 
 let myTelephone = new TelephoneBook('Name', 'Last Name', 'Email');
 myTelephone.render();
+
+
+
